@@ -1,4 +1,7 @@
-/** Create the S3 bucket with CloudFront distribution necessary to host the site */
+##
+## Create the S3 bucket with CloudFront distribution necessary to host the site
+##
+
 module "cloudfront-s3-cdn" {
   source  = "cloudposse/cloudfront-s3-cdn/aws"
   version = "0.82.4"
@@ -24,13 +27,10 @@ module "cloudfront-s3-cdn" {
   website_enabled = true
   index_document  = "index.html"
   error_document  = "404.html"
-  # deployment_principal_arns = {
-  #   "arn:aws:iam::170256646665:role/informed-principal-engineer" = [""]
-  # }
 
   depends_on = [module.acm_request_certificate]
 
-  # Lambda@Edge setup
+  # Link Lambda@Edge to the CloudFront distribution
   lambda_function_association = [{
     event_type   = "viewer-request"
     include_body = false
@@ -39,7 +39,9 @@ module "cloudfront-s3-cdn" {
 }
 
 
-# /** Request an SSL certificate */
+###
+### Request an SSL certificate
+###
 module "acm_request_certificate" {
   source                            = "cloudposse/acm-request-certificate/aws"
   version                           = "0.16.0"

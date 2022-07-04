@@ -1,5 +1,6 @@
 version: 2.1
 
+# CircleCi Orbs (libraries) used by this config
 orbs:
   node: circleci/node@5.0.2
   aws-s3: circleci/aws-s3@3.0.0
@@ -15,12 +16,12 @@ jobs:
             - dependency-cache-{{ checksum "package-lock.json" }}
 
       - run:
-          name: Install eventbridge
+          name: Install EventCatalog tooling
           working_directory: ~/project
           command: if [ ! -e "node_modules/@eventcatalog/core/bin/eventcatalog.js" ]; then yarn install; else echo "eventbridge seems to be cached"; fi;
 
       - run:
-          name: Generate Eventbridge output
+          name: Build the EventCatalog static content
           working_directory: ~/project
           command: |
             echo Running eventbridge build in `pwd`
@@ -33,6 +34,7 @@ jobs:
             - ~/project/.next/cache
 
       - aws-s3/sync:
+          # Copy the static content to the S3 bucket
           aws-region: AWS_REGION
           from: ~/project/.eventcatalog-core/out
           to: s3://infomred-iq-rob-eventcatalog-origin
@@ -42,4 +44,7 @@ workflows:
     jobs:
       - eventcatalog-contentbuild:
           context:
+            # We're getting the AWS Credentials from our CircleCI Organization context
+            # You could also just use Project level Environment Variables with
+            # IAM AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
             - rberger-aws-user-creds

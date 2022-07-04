@@ -1,3 +1,11 @@
+##
+## Configure the Lambda function and related resources.
+##
+
+###
+### Set up IAM role and policies for the lambda
+###
+
 data "aws_iam_policy_document" "lambda_edge_assume_role" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -12,6 +20,7 @@ data "aws_iam_policy_document" "lambda_edge_assume_role" {
   }
 }
 
+# Define the IAM role for logging from the Lambda function.
 data "aws_iam_policy_document" "lambda_edge_logging_policy" {
   statement {
     effect = "Allow"
@@ -24,7 +33,7 @@ data "aws_iam_policy_document" "lambda_edge_logging_policy" {
   }
 }
 
-# IAM policy for logging from a lambda
+# Add IAM policy for logging to the iam role
 resource "aws_iam_role_policy" "lambda_edge_logging" {
   name = "${var.lambda_name}-lambda_edge_logging"
   role = aws_iam_role.lambda_edge.id
@@ -33,11 +42,13 @@ resource "aws_iam_role_policy" "lambda_edge_logging" {
 }
 
 
+# Create the iam role for the lambda function
 resource "aws_iam_role" "lambda_edge" {
   name               = "eventcatalog_lambda_edge_cloudfront"
   assume_role_policy = data.aws_iam_policy_document.lambda_edge_assume_role.json
 }
 
+# Create the lambda@edge function
 resource "aws_lambda_function" "eventcatalog_auth_lambda" {
   filename      = var.lambda_file_name
   function_name = var.lambda_name

@@ -1,9 +1,15 @@
+##
+## Variable Definitions for EventCatalog-Sandbox
+##
+
 variable "region" {
-  default = ""
+  description = "The region to use for the Terraform run"
+  default     = ""
 }
 
 variable "profile" {
-  default = ""
+  description = "The local IAM profile to use for the Terraform run"
+  default     = ""
 }
 
 variable "fqdn" {
