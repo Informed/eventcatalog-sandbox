@@ -31,6 +31,7 @@ You can create a sample EventCatalog Project using the EventCatalog CLI. This ca
 
 2. Generate the scaffolding for the project
     * We're  going to call the project `my-catalog`
+    * If you had cloned the [Informed/eventcatalog-sandbox](https://github.com/Informed/eventcatalog-sandbox) github repo, the top level directory will be `eventcatalog-sandbox` but the project name is still `my-catalog` 
 
     ```shell
     npx @eventcatalog/create-eventcatalog@latest my-catalog
@@ -571,7 +572,8 @@ First we'll show doing it manually
 
 1. Create the `.circleci` directory at the top of your EventCatalog repo directory
 
-1. Create a file `.circleci/config.yml` with the following content 
+1. Create a file `.circleci/config.yml` with the following content
+    * You will need to substitue the s3 bucket name with the one you actually created with terraform
 
 ```yml
 version: 2.1
@@ -602,6 +604,7 @@ jobs:
 
       - aws-s3/sync:
           # Copy the static content to the S3 bucket
+          # Replace the s3 bucket name with the one you actually created with terraform
           aws-region: AWS_REGION
           from: ~/project/.eventcatalog-core/out
           to: s3://infomred-iq-rob-eventcatalog-origin
