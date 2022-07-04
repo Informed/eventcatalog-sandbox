@@ -26,76 +26,77 @@ You can create a sample EventCatalog Project using the EventCatalog CLI. This ca
 
 ### Generate the Scaffold Project Website
 
-* Got to a directory on your computer's filesystem where you want to save the project.
+1. Go to a directory on your computer's filesystem where you want to save the project.
 
-* We're  going to call the project `my-catalog`:
 
-  ```shell
-  npx @eventcatalog/create-eventcatalog@latest my-catalog
-  ```
+2. Generate the scaffolding for the project
+    * We're  going to call the project `my-catalog`
 
-This will generate a new directory structure as a git project:
-  ```
-  my-catalog
-  ├── services
-  │   ├── Basket Service
-  │   │     └──index.md
-  │   ├── Data Lake
-  │   │     └──index.md
-  │   ├── Payment Service
-  │   │     └──index.md
-  │   ├── Shipping Service
-  │   │     └──index.md
-  ├── events
-  │   ├── AddedItemToCart
-  │   │     └──versioned
-  │   │     │  └──0.0.1
-  │   │     │     └──index.md
-  │   │     │     └──schema.json
-  │   │     └──index.md
-  │   │     └──schema.json
-  │   ├── OrderComplete
-  │   │     └──index.md
-  │   │     └──schema.json
-  │   ├── OrderConfirmed
-  │   │     └──index.md
-  │   │     └──schema.json
-  │   ├── OrderRequested
-  │   │     └──index.md
-  │   ├── PaymentProcessed
-  │   │     └──index.md
-  ├── static
-  │   └── img
-  ├── eventcatalog.config.js
-  ├── .eventcatalog-core/
-  ├── package.json
-  ├── README.md
-  ├── yarn.lock
-  ├── Dockefile
-  ├── .dockerignore
-  ├── .gitignore
-  └── .git/
-  ```
-  
-* Change directory into `my-catalog`
-* You can preview the EventCatalog with the command:
+    ```shell
+    npx @eventcatalog/create-eventcatalog@latest my-catalog
+    ```
 
-  ```shell
-  npm run dev
-  ```
-  * And then point your browser to http://localhost:3000
-  * You will be able to view the sample Events, Services, and Domains there.  
-* Once you are done checking it out, kill the npm proces with CTL-C
+    * This will generate a new directory structure as a git project:
+    ```
+    my-catalog
+    ├── services
+    │   ├── Basket Service
+    │   │     └──index.md
+    │   ├── Data Lake
+    │   │     └──index.md
+    │   ├── Payment Service
+    │   │     └──index.md
+    │   ├── Shipping Service
+    │   │     └──index.md
+    ├── events
+    │   ├── AddedItemToCart
+    │   │     └──versioned
+    │   │     │  └──0.0.1
+    │   │     │     └──index.md
+    │   │     │     └──schema.json
+    │   │     └──index.md
+    │   │     └──schema.json
+    │   ├── OrderComplete
+    │   │     └──index.md
+    │   │     └──schema.json
+    │   ├── OrderConfirmed
+    │   │     └──index.md
+    │   │     └──schema.json
+    │   ├── OrderRequested
+    │   │     └──index.md
+    │   ├── PaymentProcessed
+    │   │     └──index.md
+    ├── static
+    │   └── img
+    ├── eventcatalog.config.js
+    ├── .eventcatalog-core/
+    ├── package.json
+    ├── README.md
+    ├── yarn.lock
+    ├── Dockefile
+    ├── .dockerignore
+    ├── .gitignore
+    └── .git/
+    ```
+
+1. Change directory into `my-catalog`
+1. You can preview the EventCatalog with the command:
+      ```shell
+      npm run dev
+      ```
+1. And then point your browser to http://localhost:3000
+    * You will be able to view the sample Events, Services, and Domains there.  
+1. Once you are done checking it out, kill the npm proces with CTL-C
 
 ## Create the Terraform to deploy to Cloudfront
 
-* Create a `terraform` directory in `my-catalog` and add an `assets` directory to it
-  * You could make this directory outside of the catalog if you would prefer to manage it that way
-  ```shell
-  mkdir -p terraform/assets
-  cd terraform
-  ```
-* Create a `.gitignore` in the terraform directory
+1. Create a `terraform` directory in `my-catalog` and add an `assets` directory to it
+    * You could make this directory outside of the catalog if you would prefer to manage it that way
+    ```shell
+    mkdir -p terraform/assets
+    cd terraform
+    ```
+2. Create a `.gitignore` in the terraform directory
   ```
   curl https://raw.githubusercontent.com/github/gitignore/main/Terraform.gitignore -o terraform/.gitignore
   ```
@@ -344,32 +345,32 @@ So we'll make a dummy temp zip file to start with.
 
 ## Initial deployment with temp lambda@edge code
 
-* Setup any credentials/login needed to run the AWS CLI / Terraform CLI from your shell window.
+1. Setup any credentials/login needed to run the AWS CLI / Terraform CLI from your shell window.
 
-* The first time you want to run things (or anytime you add terraform modules)
-  ```shell
-  terraform init
-  ```
-* Do the Terraform apply
-  * You could do a plan, but we're deploying for the first time anyway
-  * We are specifying it to use the `sandbox.tfvars` file to supply the input of the variables needed
-  ```shell
-  terraform apply  -var-file=sandbox.tfvars
-  ```
-The first run of this may take a long time to complete. I've seen it seem to be stuck at 
-  ```
-  module.cloudfront-s3-cdn.module.logs.aws_s3_bucket.default[0]: Still creating...
-  module.cloudfront-s3-cdn.aws_s3_bucket.origin[0]: Still creating...
-  ```
-for more than 30 minutes. Not sure why. But after the first run its fast.
+1. The first time you want to run things (or anytime you add terraform modules)
+    ```shell
+    terraform init
+    ```
+1. Do the Terraform apply
+    * You could do a plan, but we're deploying for the first time anyway
+    * We are specifying it to use the `sandbox.tfvars` file to supply the input of the variables needed
+    ```shell
+    terraform apply  -var-file=sandbox.tfvars
+    ```
+1. The first run of this may take a long time to complete. I've seen it seem to be stuck at 
+    ```
+    module.cloudfront-s3-cdn.module.logs.aws_s3_bucket.default[0]: Still creating...
+    module.cloudfront-s3-cdn.aws_s3_bucket.origin[0]: Still creating...
+    ```
+    for more than 30 minutes. Not sure why. But after the first run its fast.
 
-You may also get a warning:
-  ```
-  │ Warning: Argument is deprecated
-  ```
-You can ignore that. Seems to be something depreciated that is used by the [cloudposse/cloudfront-s3-cdn/aws](https://github.com/cloudposse/terraform-aws-cloudfront-s3-cdn) terraform module.
+    You may also get a warning:
+      ```
+      │ Warning: Argument is deprecated
+      ```
+    You can ignore that. Seems to be something depreciated that is used by the [cloudposse/cloudfront-s3-cdn/aws](https://github.com/cloudposse/terraform-aws-cloudfront-s3-cdn) terraform module.
 
-At the end of the run it will print out the outputs with something like:
+1. At the end of the run it will print out the outputs with something like:
   ```
   Apply complete! Resources: 14 added, 0 changed, 0 destroyed.
 
@@ -383,9 +384,9 @@ At the end of the run it will print out the outputs with something like:
   s3_bucket = "infomred-iq-rob-eventcatalog-origin"
   ```
 
-Some of this info will be needed for the following steps to setup the Google SSO.
+  Some of this info will be needed for the following steps to setup the Google SSO.
 
-At this point if you tried to access `https://eventcatalog.rob.informediq-infra.com` you would get an error since the lambda@edge has the dummy code in it. This will be rectified in the following steps.
+  At this point if you tried to access `https://eventcatalog.rob.informediq-infra.com` you would get an error since the lambda@edge has the dummy code in it. This will be rectified in the following steps.
 
 ## Build the Lambda@edge code with Widen/cloudfront-auth
 
@@ -532,28 +533,27 @@ You can deploy the content manually. But you really should use aCI/CD systems to
 
 ### Manual deployment
 
-First we'll show doing it manually
-
 The key actions needed are to:
 
-    * Change directory to be in the top of the EventCatalog repo
-    * Build the static assets using the EventCatalog cli
-    * Copy the static assets to the S3 bucket created by Terraform
+* Change directory to be in the top of the EventCatalog repo
+* Build the static assets using the EventCatalog cli
+* Copy the static assets to the S3 bucket created by Terraform
+
+First we'll show doing it manually
 
 1. Build the static assets 
     * Assumes you are in the top level of the EventCatalog Repo
     * You only need to do `yarn install` the first time you use any of the commands
-
-  ```shell
-  yarn install
-  yarn build
-  ```
+    ```shell
+    yarn install
+    yarn build
+    ```
 1. Upload the static assets to S3
 
-* Assumes you have installed the AWS CLI 
-* You have configured you local shell environment with proper IAM Profile to run the AWS CLI
-* Use the actual s3 bucket you created in your terraform run
-  * The example shows the bucket we've used in our working example
+    * Assumes you have installed the AWS CLI 
+    * You have configured you local shell environment with proper IAM Profile to run the AWS CLI
+    * Use the actual s3 bucket you created in your terraform run
+        * The example shows the bucket we've used in our working example
 
   ```shell
   aws s3 sync .eventcatalog-core/out s3://informed-iq-rob-eventcatalog-origin
@@ -640,24 +640,24 @@ Once you have created this file and have all your commits in your EventCatalog R
     ```
 
 1. Run `terraform apply`
-  ```shell
-  terraform apply -var-file=sandbox.tfvars
-  ```
+    ```shell
+    terraform apply -var-file=sandbox.tfvars
+    ```
 
 1. A successful run will display the output values
 
     * They should be something along the lines of the following:
 
-```
-Outputs:
+    ```
+    Outputs:
 
-cf_aliases = tolist([
-  "eventcatalog-projectname.rob.informediq-infra.com",
-  "eventcatalog.rob.informediq-infra.com",
-])
-cf_domain_name = "d32pr2t6ww8z3r.cloudfront.net"
-s3_bucket = "infomred-iq-rob-eventcatalog-origin"
-```
+    cf_aliases = tolist([
+      "eventcatalog-projectname.rob.informediq-infra.com",
+      "eventcatalog.rob.informediq-infra.com",
+    ])
+    cf_domain_name = "d32pr2t6ww8z3r.cloudfront.net"
+    s3_bucket = "infomred-iq-rob-eventcatalog-origin"
+    ```
 
 You should be able to go to ether of your cf_aliases.
 
