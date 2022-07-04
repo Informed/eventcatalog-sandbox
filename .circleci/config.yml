@@ -11,9 +11,6 @@ jobs:
       - image: cimg/node:16.15
     steps:
       - checkout
-      # - restore_cache:
-      #     keys:
-      #       - dependency-cache-{{ checksum "package-lock.json" }}
 
       - run:
           name: Install EventCatalog tooling
@@ -26,12 +23,6 @@ jobs:
           command: |
             echo Running eventbridge build in `pwd`
             yarn build
-
-      # - save_cache:
-      #     key: dependency-cache-{{ checksum "package-lock.json" }}
-      #     paths:
-      #       - ~/project/node_modules
-      #       - ~/project/.next/cache
 
       - aws-s3/sync:
           # Copy the static content to the S3 bucket
