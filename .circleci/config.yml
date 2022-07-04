@@ -35,7 +35,7 @@ jobs:
       - aws-s3/sync:
           aws-region: AWS_REGION
           from: ~/project/.eventcatalog-core/out
-          to: s3://nfomred-iq-rob-eventcatalog-origin
+          to: s3://infomred-iq-rob-eventcatalog-origin
 
 workflows:
   eventcatalog-contentworkflow:
