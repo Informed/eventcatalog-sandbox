@@ -1,0 +1,25 @@
+{
+  "name": "my-catalog",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "eventcatalog start",
+    "dev": "eventcatalog dev",
+    "build": "eventcatalog build",
+    "generate": "eventcatalog generate",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@eventcatalog/types": "0.2.0",
+    "@types/node": "18.0.0",
+    "@types/react": "18.0.14",
+    "autoprefixer": "^10.4.0",
+    "cross-env": "^7.0.3",
+    "postcss": "^8.3.11",
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.4.4"
+  },
+  "dependencies": {
+    "@eventcatalog/core": "0.3.0"
+  }
+}

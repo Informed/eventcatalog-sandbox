@@ -1,0 +1,45 @@
+version: 2.1
+
+orbs:
+  node: circleci/node@5.0.2
+  aws-s3: circleci/aws-s3@3.0.0
+
+jobs:
+  eventcatalog-contentbuild:
+    docker:
+      - image: cimg/node:16.15
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - eventbridge-cache-v1
+
+      - run:
+          name: Install eventbridge
+          working_directory: ~/project
+          command: if [ ! -e "node_modules/@eventcatalog/core/bin/eventcatalog.js" ]; then yarn install; else echo "eventbridge seems to be cached"; fi;
+
+      - run:
+          name: Generate Eventbridge output
+          working_directory: ~/project
+          command: |
+            echo Running eventbridge build in `pwd`
+            yarn build
+
+      - save_cache:
+          key: dependency-cache-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/project/node_modules
+            - ~/project/.next/cache
+
+      - aws-s3/sync:
+          aws-region: AWS_REGION
+          from: ~/project/.eventcatalog-core/out
+          to: s3://nfomred-iq-rob-eventcatalog-origin
+
+workflows:
+  eventcatalog-contentworkflow:
+    jobs:
+      - eventcatalog-contentbuild:
+          context:
+            - rberger-aws-user-creds
