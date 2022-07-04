@@ -404,23 +404,23 @@ This assumes you don't already have a Project in the Google Developers Console b
 #### Create a new Project
 
 1. Click on the Projects pulldown on the very top menubar to the right of the `Google Cloud` logo
-    1. Click on `New project` in the modal popup that shows after clicking the pulldown 
+    1. Click on `New project` in the modal popup that shows after clicking the pulldown   
 ![Google Console New Project](images/eventcatalog_google_console_new_project.jpg)
 
-1. Fill in the New Project Form and click on `CREATE`
+1. Fill in the New Project Form and click on `CREATE`  
 ![Google Console Create Project](images/eventcatalog_create_google_project.jpg)
 
 #### Create OAuth Consent and Credentials
 
-1. Select `APIs & Services` from the menu bar on the left to go to that page of the project
+1. Select `APIs & Services` from the menu bar on the left to go to that page of the project  
 ![Google Console Select APIs and Services](images/eventcatalog_google_console_select_apis_and_services.jpg)
 
-1. Select `Credentials` from the new menu bar on the left
+1. Select `Credentials` from the new menu bar on the left  
 ![Google Console Select Credentials](images/eventcatalog_google_console_select_credentials.jpg)
 
-1. Click on `Configure Consent Screen` to configure the OAuth consent info
+1. Click on `Configure Consent Screen` to configure the OAuth consent info  
 ![Google Console Select Configure Consent Screen](images/eventcatalog_google_console_select_configure_consent_screen.jpg)
-    1. Select `Internal` and then click on `CREATE`
+    1. Select `Internal` and then click on `CREATE`  
 ![Google OAuth Consent Screen](images/eventcatalog_google_oauth_consent_screen.jpg)
     1. Fill in at least 
         * App Name (`EventCatalog Sandbox`)
@@ -430,25 +430,25 @@ This assumes you don't already have a Project in the Google Developers Console b
           * This should be the domain used for the email address of people logging in via Google SSO.
           * In my case this is `informed.iq`
         * Developer contact information email address
-          * Can be your email
+          * Can be your email  
 ![Google App Registration](images/eventcatalog_google_app_registration.jpg)
     1. Click `SAVE AND CONTINUE`
     1. Click `SAVE AND CONTINUE` on the next screen (`Scopes Page`)
     1. Click on `BACK TO DASHBOARD` on the next screen (`Summary Page`)
     1. Click on `Credentials` on the left hand nav bar to get back to the Credentials page
               
-1. Click on `+ Create Credentials` on the top menu bar and select `OAuth client ID` from the pulldown
+1. Click on `+ Create Credentials` on the top menu bar and select `OAuth client ID` from the pulldown  
 ![Google Console Create Credentials](images/eventcatalog_google_console_Create_Credentials.jpg)
 
     1. Select **Web application** for the Application type
     1. Under **Authorized redirect URIs**, enter your Cloudfront hostname with your preferred path value for the authorization callback. For our working example: `https://eventcatalog-projectname.rob.informediq-infra.com/_callback`
-    1. Click `CREATE` when done
+    1. Click `CREATE` when done  
 ![Create OAuth Client ID](images/eventcatalog_create_oauth_clientid.jpg)
     
 1. Capture the resulting OAuth Client ID and Secret
     * A modal window will show the OAuth Client ID and secret.
     * You should store that somewhere, though you can also always view it on the Google Console later
-    * You can also download the JSON with the info and save it that way
+    * You can also download the JSON with the info and save it that way  
 ![OAuth Credentials](images/eventcatalog_oauth_credentials.jpg)
     
 We're now done with the Google Developer's Console
@@ -666,7 +666,7 @@ You should be able to go to ether of your cf_aliases.
    https://eventcatalog.rob.informediq-infra.com
    ```
 * If you aren't already logged in, it should pass you to Google SSO authentication.
-* Once you are logged in you should see the Home Page of the EventCatalog
+* Once you are logged in you should see the Home Page of the EventCatalog  
 ![EventCatalog Home Page](images/eventcatalog_home_page.jpg)
 
 You can now start using the EventCatalog by updating the source files to fit your Domains, Services, and Events. 
