@@ -12,7 +12,7 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - eventbridge-cache-v1
+            - dependency-cache-{{ checksum "yarn.lock" }}
 
       - run:
           name: Install eventbridge
