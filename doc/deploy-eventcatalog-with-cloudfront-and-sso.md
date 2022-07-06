@@ -211,7 +211,7 @@ module "cloudfront-s3-cdn" {
 
   name                    = "eventcatalog"
   environment             = "rob"
-  namespace               = "infomred-iq"
+  namespace               = "informediq"
   encryption_enabled      = true
   allow_ssl_requests_only = false
 
@@ -381,8 +381,8 @@ So we'll make a dummy temp zip file to start with.
     "eventcatalog-projectname.rob.informediq-infra.com",
     "eventcatalog.rob.informediq-infra.com",
   ])
-  cf_domain_name = "d32pr2t6ww8z3r.cloudfront.net"
-  s3_bucket = "infomred-iq-rob-eventcatalog-origin"
+  cf_domain_name = "d32pr*******z3r.cloudfront.net"
+  s3_bucket = "informediq-rob-eventcatalog-origin"
   ```
 
   Some of this info will be needed for the following steps to setup the Google SSO.
@@ -478,9 +478,10 @@ To at least remove some blatant high risk vulnerabilities. It seens to not impac
       * `Hosted Domain` - The email address domainname that will be used by people logging in via Google SSO
       * `Session Duration` - How many hours the session should last until the user needs to re-authenticate
       * `Authorization methods` - We are selecting `1` for `Hosted Domain`
-      
+
+_NOTE: Redacting a few items for security_
     ```text
-    >: Enter distribution name: d32pr2t6ww8z3r.cloudfront.net
+    >: Enter distribution name: d32pr*******z3r.cloudfront.net
     >: Authentication methods:
         (1) Google
         (2) Microsoft
@@ -492,10 +493,10 @@ To at least remove some blatant high risk vulnerabilities. It seens to not impac
 
         Select an authentication method: 1
     Generating public/private rsa key pair.
-    Your identification has been saved in ./distributions/d32pr2t6ww8z3r.cloudfront.net/id_rsa
-    Your public key has been saved in ./distributions/d32pr2t6ww8z3r.cloudfront.net/id_rsa.pub
+    Your identification has been saved in ./distributions/d32pr*******z3r.cloudfront.net/id_rsa
+    Your public key has been saved in ./distributions/d32pr*******z3r.cloudfront.net/id_rsa.pub
     The key fingerprint is:
-    SHA256:vJS0/xcn4vAPChHdRx9bhf+QGbvq2qYRAdTNVyiE2ic rberger@tardis.local
+    SHA256:vJS0/*************************************************iE2ic rberger@tardis.local
     The key's randomart image is:
     +---[RSA 4096]----+
     |       .o. =. .==|
@@ -526,7 +527,7 @@ To at least remove some blatant high risk vulnerabilities. It seens to not impac
     * The process will output the path that the zip file was saved as relative to.
     * In my setup the command to do the copy is:
   ```shell
-  cp distributions/d32pr2t6ww8z3r.cloudfront.net/d32pr2t6ww8z3r.cloudfront.net.zip ../my-catalog/terraform/assets
+  cp distributions/d32pr*******z3r.cloudfront.net/d32pr*******z3r.cloudfront.net.zip ../my-catalog/terraform/assets
   ```
 ## Deploy the EventCatalog content to S3
 
@@ -557,7 +558,7 @@ First we'll show doing it manually
         * The example shows the bucket we've used in our working example
 
   ```shell
-  aws s3 sync .eventcatalog-core/out s3://informed-iq-rob-eventcatalog-origin
+  aws s3 sync .eventcatalog-core/out s3://informediq-rob-eventcatalog-origin
   ```
 
 ### Deployment with CircleCi
@@ -607,7 +608,7 @@ jobs:
           # Replace the s3 bucket name with the one you actually created with terraform
           aws-region: AWS_REGION
           from: ~/project/.eventcatalog-core/out
-          to: s3://infomred-iq-rob-eventcatalog-origin
+          to: s3://informediq-rob-eventcatalog-origin
 
 workflows:
   eventcatalog-contentworkflow:
@@ -630,7 +631,7 @@ Once you have created this file and have all your commits in your EventCatalog R
     * Make sure the new zip file is in the `assets` directory
 
 1. Update the tfvars input file (`sandbox.tfvars` in our working example) with the new filename
-    * `lambda_file_name = "assets/d32pr2t6ww8z3r.cloudfront.net.zip"`
+    * `lambda_file_name = "assets/d32pr*******z3r.cloudfront.net.zip"`
     ```
     region           = "us-east-1"
     profile          = "sandbox"
@@ -638,7 +639,7 @@ Once you have created this file and have all your commits in your EventCatalog R
     alt_fqdn         = "eventcatalog.rob.informediq-infra.com"
     zone_id          = "Z10188613LLRJXN9ZCK7U"
     zone_name        = "rob.informediq-infra.com"
-    lambda_file_name = "assets/d32pr2t6ww8z3r.cloudfront.net.zip"
+    lambda_file_name = "assets/d32pr*******z3r.cloudfront.net.zip"
 
     ```
 
@@ -655,11 +656,11 @@ Once you have created this file and have all your commits in your EventCatalog R
     Outputs:
 
     cf_aliases = tolist([
-      "eventcatalog-projectname.rob.informediq-infra.com",
+      "eventcatalog-sandbox.rob.informediq-infra.com",
       "eventcatalog.rob.informediq-infra.com",
     ])
-    cf_domain_name = "d32pr2t6ww8z3r.cloudfront.net"
-    s3_bucket = "infomred-iq-rob-eventcatalog-origin"
+    cf_domain_name = "d32pr*******z3r.cloudfront.net"
+    s3_bucket = "informediq-rob-eventcatalog-origin"
     ```
 
 You should be able to go to ether of your cf_aliases.

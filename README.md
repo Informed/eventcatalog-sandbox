@@ -6,7 +6,7 @@ This project uses the demo scaffolding from  [EventCatalog](https://www.eventcat
 
 [David Boyne](https://www.boyney.io)'s [EventCatalog](https://www.eventcatalog.dev) is an wonderful Open Source project that acts as a unifying Documentation tool for Event-Driven Architectures. It helps you document, visualize and keep on top of your Event Driven Architectures' events, schemas, producers, consumers and services.
 
-The main value add is in the `terreform` directory which builds Cloudfront and lambda@edge infrastructure. The  `.circleci/config.yml` deploys the content to Cloudfront's S3 bucket.
+The main value add is in the `terraform` directory which builds Cloudfront and lambda@edge infrastructure. The  `.circleci/config.yml` deploys the content to Cloudfront's S3 bucket.
 
 A full description of how to use it is in [Deploy EventCatalog with Google SSO Access Control via AWS CloudFront](doc/deploy-eventcatalog-with-cloudfront-and-sso.md)
 
