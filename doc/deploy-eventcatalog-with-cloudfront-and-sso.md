@@ -4,12 +4,14 @@ menu_order: 1
 post_status: draft
 tags: aws, awscommunity, eventbridge, eventcatalog, documentation
 post_excerpt: How to setup a EventCatalog with SSO in AWS Cloudfront
-canonical_url: https://www.ibd.com/howto/deploy-eventcatalog-with-cloudfront-and-sso/
+canonical_url: https://informed.iq/deploy-eventcatalog-with-cloudfront-and-sso/
 ---
 
-[David Boyne](https://www.boyney.io)'s [EventCatalog](https://www.eventcatalog.dev) is an wonderful Open Source project that acts as a unifying Documentation tool for Event-Driven Architectures. It helps you document, visualize and keep on top of your Event Driven Architectures' events, schemas, producers, consumers and services.
+This article shows how to deploy your own [EventCatalog](https://www.eventcatalog.dev) in [AWS CloudFront](https://aws.amazon.com/cloudfront/) via [Terraform](https://www.terraform.io) and updates to the Catalog via CI/CD ([CircleCi](http://www.circleci.com) in this case, but can be easily applied to other CI systems). It also shows how to use [Lambda@Edge](https://aws.amazon.com/lambda/edge/) to implement [Google SSO  / OpenID Connect](https://developers.google.com/identity/protocols/oauth2/openid-connect) via the [Widen/cloudfront-auth](https://github.com/Widen/cloudfront-auth) Project.
 
-You can go to the above links to find out more about EventCatalog itself. This article shows how to deploy your own EventCatalog in [AWS CloudFront](https://aws.amazon.com/cloudfront/) via [Terraform](https://www.terraform.io) and updates to the Catalog via CI/CD ([CircleCi](http://www.circleci.com) in this case, but can be easily applied to other CI systems). It also shows how to use [Lambda@Edge](https://aws.amazon.com/lambda/edge/) to implement [Google SSO  / OpenID Connect](https://developers.google.com/identity/protocols/oauth2/openid-connect) via the [Widen/cloudfront-auth](https://github.com/Widen/cloudfront-auth) Project.
+[EventCatalog](https://www.eventcatalog.dev) was created by [David Boyne](https://www.boyney.io). It is an wonderful Open Source project that acts as a unifying Documentation tool for Event-Driven Architectures. It helps you document, visualize and keep on top of your Event Driven Architectures' events, schemas, producers, consumers and services.
+
+You can go to the above links to find out more about EventCatalog itself. 
 
 The full project is in the [Informed/eventcatalog-sandbox](https://github.com/Informed/eventcatalog-sandbox) Github Repo
 
@@ -507,6 +509,7 @@ To at least remove some blatant high risk vulnerabilities. It seens to not impac
       * `Authorization methods` - We are selecting `1` for `Hosted Domain`
 
 _NOTE: Redacting a few items for security_
+
     ```text
     >: Enter distribution name: d32pr*******z3r.cloudfront.net
     >: Authentication methods:
@@ -548,7 +551,7 @@ _NOTE: Redacting a few items for security_
        (3) Google Groups Lookup - verify email exists in one of given Google Groups
 
        Select an authorization method: 1
-    ```  
+    ``` 
 
 1. Copy the resulting `zip` file found in the distribution folder in the Widen/cloudfront-auth directory to the `assets` directory in the terraform directory
     * The process will output the path that the zip file was saved as relative to.
@@ -659,6 +662,7 @@ Once you have created this file and have all your commits in your EventCatalog R
 
 1. Update the tfvars input file (`sandbox.tfvars` in our working example) with the new filename
     * `lambda_file_name = "assets/d32pr*******z3r.cloudfront.net.zip"`
+    
     ```
     region           = "us-east-1"
     profile          = "sandbox"
