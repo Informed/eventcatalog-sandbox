@@ -510,48 +510,48 @@ To at least remove some blatant high risk vulnerabilities. It seens to not impac
 
 _NOTE: Redacting a few items for security_
 
-    ```text
-    >: Enter distribution name: d32pr*******z3r.cloudfront.net
-    >: Authentication methods:
-        (1) Google
-        (2) Microsoft
-        (3) GitHub
-        (4) OKTA
-        (5) Auth0
-        (6) Centrify
-        (7) OKTA Native
+```text
+>: Enter distribution name: d32pr*******z3r.cloudfront.net
+>: Authentication methods:
+    (1) Google
+    (2) Microsoft
+    (3) GitHub
+    (4) OKTA
+    (5) Auth0
+    (6) Centrify
+    (7) OKTA Native
 
-        Select an authentication method: 1
-    Generating public/private rsa key pair.
-    Your identification has been saved in ./distributions/d32pr*******z3r.cloudfront.net/id_rsa
-    Your public key has been saved in ./distributions/d32pr*******z3r.cloudfront.net/id_rsa.pub
-    The key fingerprint is:
-    SHA256:vJS0/*************************************************iE2ic rberger@tardis.local
-    The key's randomart image is:
-    +---[RSA 4096]----+
-    |       .o. =. .==|
-    |         oo.+.=.+|
-    |        ooo .o.B.|
-    |       o.+E...= .|
-    |        S .o   o.|
-    |       . +... + o|
-    |        o o+.o + |
-    |         . ==..  |
-    |          +=+o.  |
-    +----[SHA256]-----+
-    writing RSA key
-    >>: Client ID: 787***********************13cho.apps.googleusercontent.com
-    >>: Client Secret: GOCSPX-****************untA
-    >>: Redirect URI: https://eventcatalog-projectname.rob.informediq-infra.com/_callback
-    >>: Hosted Domain: informed.iq
-    >>: Session Duration (hours):  (0)  12
-    >>: Authorization methods:
-       (1) Hosted Domain - verify email's domain matches that of the given hosted domain
-       (2) HTTP Email Lookup - verify email exists in JSON array located at given HTTP endpoint
-       (3) Google Groups Lookup - verify email exists in one of given Google Groups
+    Select an authentication method: 1
+Generating public/private rsa key pair.
+Your identification has been saved in ./distributions/d32pr*******z3r.cloudfront.net/id_rsa
+Your public key has been saved in ./distributions/d32pr*******z3r.cloudfront.net/id_rsa.pub
+The key fingerprint is:
+SHA256:vJS0/*************************************************iE2ic rberger@tardis.local
+The key's randomart image is:
++---[RSA 4096]----+
+|       .o. =. .==|
+|         oo.+.=.+|
+|        ooo .o.B.|
+|       o.+E...= .|
+|        S .o   o.|
+|       . +... + o|
+|        o o+.o + |
+|         . ==..  |
+|          +=+o.  |
++----[SHA256]-----+
+writing RSA key
+>>: Client ID: 787***********************13cho.apps.googleusercontent.com
+>>: Client Secret: GOCSPX-****************untA
+>>: Redirect URI: https://eventcatalog-projectname.rob.informediq-infra.com/_callback
+>>: Hosted Domain: informed.iq
+>>: Session Duration (hours):  (0)  12
+>>: Authorization methods:
+   (1) Hosted Domain - verify email's domain matches that of the given hosted domain
+   (2) HTTP Email Lookup - verify email exists in JSON array located at given HTTP endpoint
+   (3) Google Groups Lookup - verify email exists in one of given Google Groups
 
-       Select an authorization method: 1
-    ``` 
+   Select an authorization method: 1
+``` 
 
 1. Copy the resulting `zip` file found in the distribution folder in the Widen/cloudfront-auth directory to the `assets` directory in the terraform directory
     * The process will output the path that the zip file was saved as relative to.
