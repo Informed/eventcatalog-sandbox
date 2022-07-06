@@ -1,5 +1,13 @@
 ###
 ### Set up the Terraform state file and providers.
+
+locals {
+  fqdn        = "${var.app_name}-${var.project_name}.${var.environment}.${var.base_domain_name}"
+  alt_fqdn    = "${var.app_name}.${var.environment}.${var.base_domain_name}"
+  zone_name   = "${var.environment}.${var.base_domain_name}"
+  lambda_name = "${var.app_name}_${var.environment}_000"
+}
+
 terraform {
   required_version = ">= 1.2.0"
   required_providers {
@@ -17,4 +25,3 @@ provider "aws" {
   region  = var.region
   profile = var.profile
 }
-
