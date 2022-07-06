@@ -1,6 +1,10 @@
 ###
 ### Set up the Terraform state file and providers.
 
+###
+### Using locals to form variables by concatinating input variables
+### Unfortunately can not do that in variables.tf or <env>.tfvars
+###
 locals {
   fqdn        = "${var.app_name}-${var.project_name}.${var.environment}.${var.base_domain_name}"
   alt_fqdn    = "${var.app_name}.${var.environment}.${var.base_domain_name}"
