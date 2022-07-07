@@ -1,9 +1,9 @@
 ---
-title: Deploy EventCatalog with Google SSO Access Control via AWS CloudFront
+title: Deploy EventCatalog to AWS CloudFront with Google SSO Access Control via Terraform 
 menu_order: 1
 post_status: draft
 tags: aws, awscommunity, eventbridge, eventcatalog, documentation
-post_excerpt: How to setup a EventCatalog with SSO in AWS Cloudfront
+post_excerpt: How to setup an EventCatalog with SSO in AWS Cloudfront with Terraform
 canonical_url: https://informed.iq/deploy-eventcatalog-with-cloudfront-and-sso/
 ---
 
@@ -13,7 +13,7 @@ This article shows how to deploy your own [EventCatalog](https://www.eventcatalo
 
 You can go to the above links to find out more about EventCatalog itself. 
 
-The full project is in the [Informed/eventcatalog-sandbox](https://github.com/Informed/eventcatalog-sandbox) Github Repo
+All the code for this project is in the [Informed/eventcatalog-sandbox](https://github.com/Informed/eventcatalog-sandbox) Github Repo
 
 ## Create EventCatalog Project
 
@@ -429,7 +429,7 @@ Clone the Widen/cloudfront-auth repo in a directory outside of your `my-catalog`
 
 Follow the instructions in the [README](https://github.com/Widen/cloudfront-auth/blob/master/README.md#identity-provider-guides) for the Identity Provider of your choice. We are going to use the Google Hosted Domain mechanism:
 
-### Create the OAuth **Credentials** in the [Google developers console](https://console.developers.google.com)
+### Create the OAuth Credentials in the [Google developers console](https://console.developers.google.com)
 This assumes you don't already have a Project in the Google Developers Console but you have an account in the Google Developers Console.
 
 #### Create a new Project
@@ -712,4 +712,16 @@ You should be able to go to ether of your cf_aliases.
 * Once you are logged in you should see the Home Page of the EventCatalog  
 ![EventCatalog Home Page](images/eventcatalog_home_page.jpg)
 
-You can now start using the EventCatalog by updating the source files to fit your Domains, Services, and Events. 
+You can now start using the EventCatalog by updating the source files to fit your Domains, Services, and Events.
+
+## Improvements? Suggestions? Alternatives?
+
+Please feel free to comment or contact me if you find any bugs, issues or have suggestions for improvements!
+
+I am interested in hearing about alternatives to the [Widen/cloudfront-auth](https://github.com/Widen/cloudfront-auth) as it has not been updated in a while.
+
+## About the Author
+
+As the Chief Architect, Rob guides the evolution of the InformedIQ Software and Infrastructure. His experience spans the rise and fall of many technology lifecycles from machine vision, digitization of professional video production equipment, Internet Infrastructure, Wireless, E-commerce, Big Data, IoT, DevOps and Machine Learning. He has been a founder or a technical leader in several startups in Silicon Valley.
+
+Twitter: @rberger
