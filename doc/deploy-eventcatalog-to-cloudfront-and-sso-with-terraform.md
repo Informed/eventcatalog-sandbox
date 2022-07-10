@@ -349,9 +349,6 @@ lambda_file_name = "assets/temp.zip"
 base_domain_name = "informediq-infra.com"
 bucket_namespace = "informediq"
 zone_id          = "Z10***********************K7U"
-
-    
-
 ```
 ### Create a placeholder lambda code zip file
 
