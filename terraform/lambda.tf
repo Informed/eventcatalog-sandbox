@@ -44,7 +44,7 @@ resource "aws_iam_role_policy" "lambda_edge_logging" {
 
 # Create the iam role for the lambda function
 resource "aws_iam_role" "lambda_edge" {
-  name               = "${var.app_name}_lambda_edge_cloudfront"
+  name               = "${local.lambda_name}_lambda_edge_cloudfront"
   assume_role_policy = data.aws_iam_policy_document.lambda_edge_assume_role.json
 }
 
