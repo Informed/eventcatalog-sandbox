@@ -645,7 +645,7 @@ jobs:
           # Replace the s3 bucket name with the one you actually created with terraform
           aws-region: AWS_REGION
           from: ~/project/.eventcatalog-core/out
-          to: s3://informediq-rob-eventcatalog-origin
+          to: s3://informediq-rob-blogpost-eventcatalog-origin
 
 workflows:
   eventcatalog-contentworkflow:
