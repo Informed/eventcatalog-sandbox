@@ -1,0 +1,42 @@
+version: 2.1
+
+# CircleCi Orbs (libraries) used by this config
+orbs:
+  node: circleci/node@5.0.2
+  aws-s3: circleci/aws-s3@3.0.0
+
+jobs:
+  eventcatalog-contentbuild:
+    docker:
+      - image: cimg/node:16.15
+    steps:
+      - checkout
+
+      - run:
+          name: Install EventCatalog tooling
+          working_directory: ~/project
+          command: if [ ! -e "node_modules/@eventcatalog/core/bin/eventcatalog.js" ]; then yarn install; else echo "eventbridge seems to be cached"; fi;
+
+      - run:
+          name: Build the EventCatalog static content
+          working_directory: ~/project
+          command: |
+            echo Running eventbridge build in `pwd`
+            yarn build
+
+      - aws-s3/sync:
+          # Copy the static content to the S3 bucket
+          # Replace the s3 bucket name with the one you actually created with terraform
+          aws-region: AWS_REGION
+          from: ~/project/.eventcatalog-core/out
+          to: s3://informediq-rob-blogpost-eventcatalog-origin
+
+workflows:
+  eventcatalog-contentworkflow:
+    jobs:
+      - eventcatalog-contentbuild:
+          context:
+            # We're getting the AWS Credentials from our CircleCI Organization context
+            # You could also just use Project level Environment Variables with
+            # IAM AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+            - rberger-aws-user-creds
